@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neo 4K Pro | اشتراكات IPTV العالمية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Neo 4K Pro | اشتراكات IPTV الاحترافية</title>
     
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
         :root {
-            /* الألوان الداكنة افتراضياً */
             --bg: #0f172a;
             --card: #1e293b;
             --text: #f1f5f9;
@@ -17,7 +17,8 @@
             --primary-hover: #4f46e5;
             --accent: #f59e0b;
             --border: #334155;
-            --glass: rgba(30, 41, 59, 0.9);
+            --success: #22c55e;
+            --danger: #ef4444;
         }
 
         body {
@@ -26,325 +27,386 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            padding-bottom: 60px;
         }
 
-        /* Header */
+        /* --- Components --- */
         header {
             background: var(--card);
-            padding: 20px;
+            padding: 15px 5%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .logo {
-            font-size: 26px;
-            font-weight: 800;
-            text-decoration: none;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .logo { font-size: 24px; font-weight: 800; text-decoration: none; color: #fff; }
+        .logo span { color: var(--primary); }
+
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
+
+        /* Auth Buttons */
+        .auth-btn {
+            background: var(--primary);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+            transition: 0.3s;
         }
 
-        .logo span {
-            color: var(--primary);
-        }
+        .auth-btn:hover { background: var(--primary-hover); }
 
         /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 50px 20px;
-        }
-
-        .hero h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .hero { text-align: center; padding: 60px 20px; }
+        .hero h1 { font-size: clamp(24px, 5vw, 40px); margin-bottom: 15px; background: linear-gradient(90deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         /* Pricing Cards */
         .plans {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
+            margin-bottom: 50px;
         }
 
         .card {
             background: var(--card);
             padding: 30px 20px;
-            border-radius: 20px;
+            border-radius: 24px;
             cursor: pointer;
             border: 2px solid var(--border);
+            text-align: center;
             transition: 0.3s;
             position: relative;
             overflow: hidden;
-            text-align: center;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-        }
+        .card.active { border-color: var(--primary); background: rgba(99, 102, 241, 0.05); transform: scale(1.03); }
 
-        .card.active {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.1);
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
-        }
-
-        /* شريط الأكثر مبيعاً جهة اليسار */
         .card.popular::before {
             content: "الأكثر مبيعاً";
             position: absolute;
-            top: 18px;
-            left: -35px; /* تم التعديل لليسار */
+            top: 20px; left: -35px;
             background: var(--accent);
             color: #000;
             padding: 5px 40px;
-            transform: rotate(-45deg); /* تدوير عكسي لليناسب اليسار */
-            font-size: 11px;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transform: rotate(-45deg);
+            font-size: 11px; font-weight: bold;
         }
 
-        .price {
-            font-size: 30px;
-            font-weight: 800;
-            color: var(--primary);
-            margin: 10px 0;
-        }
-
+        .price { font-size: 32px; font-weight: 800; color: var(--primary); margin: 15px 0; }
         .price small { font-size: 14px; color: #94a3b8; }
 
-        /* Form */
-        .order-section {
-            max-width: 500px;
-            margin: 40px auto;
-            padding: 30px;
+        /* Dashboard & Form */
+        .order-section, .dashboard-section {
             background: var(--card);
             border-radius: 25px;
+            padding: 30px;
             border: 1px solid var(--border);
+            margin-bottom: 30px;
         }
 
         input {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            background: #0f172a;
-            color: #fff;
-            box-sizing: border-box;
-            font-family: inherit;
+            width: 100%; padding: 15px; margin-bottom: 15px;
+            border-radius: 12px; border: 1px solid var(--border);
+            background: #0f172a; color: #fff; box-sizing: border-box; font-family: inherit;
         }
 
         .note {
             background: rgba(245, 158, 11, 0.1);
             border-right: 4px solid var(--accent);
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 14px;
-            margin-top: 20px;
-            text-align: right;
+            padding: 15px; border-radius: 8px; font-size: 14px; margin-top: 15px;
         }
 
-        button {
-            width: 100%;
-            padding: 18px;
-            border-radius: 12px;
-            border: none;
-            background: var(--primary);
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
+        /* Status Badges */
+        .status-badge { padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: bold; }
+        .status-pending { background: rgba(245, 158, 11, 0.2); color: var(--accent); }
+        .status-success { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+
+        /* Modal */
+        .modal {
+            display: none; position: fixed; z-index: 1000;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); align-items: center; justify-content: center;
+            backdrop-filter: blur(5px);
         }
 
-        button:disabled { background: #475569; opacity: 0.6; }
-
-        /* Footer */
-        footer {
-            background: #0a0f1e;
-            padding: 40px 20px;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            margin-top: 60px;
+        .modal-content {
+            background: var(--card); padding: 40px 30px; border-radius: 24px;
+            width: 90%; max-width: 400px; text-align: center; position: relative;
         }
-
-        .social-links {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .social-links a {
-            color: #94a3b8;
-            font-size: 24px;
-            transition: 0.3s;
-        }
-
-        .social-links a:hover { color: var(--primary); }
 
         /* Floating WhatsApp */
         .whatsapp-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: #25d366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 1000;
-            text-decoration: none;
+            position: fixed; bottom: 20px; right: 20px;
+            background: #25d366; color: white; width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 30px; text-decoration: none; z-index: 999; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 28px; }
-            .plans { grid-template-columns: 1fr; }
-        }
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); opacity: 0.6; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <header>
-    <a href="#" class="logo">
-        <i class="fas fa-play-circle"></i> NEO <span>4K PRO</span>
-    </a>
+    <a href="#" class="logo">NEO <span>4K PRO</span></a>
+    <div id="authContainer">
+        <button class="auth-btn" onclick="openAuthModal()">دخول / تسجيل</button>
+    </div>
+    <div id="userProfile" style="display: none; align-items: center; gap: 15px;">
+        <span id="headerUserName" style="font-weight: 600;"></span>
+        <button class="auth-btn" style="background: var(--danger)" onclick="handleLogout()">خروج</button>
+    </div>
 </header>
 
-<div class="hero">
-    <h1>اختر خطة اشتراكك المفضلة</h1>
-    <p>بث مباشر لجميع القنوات العالمية والعربية بجودة Ultra HD</p>
-</div>
-
-<div class="plans">
-    <div class="card" data-price="400">
-        <h3>شهر واحد</h3>
-        <div class="price">400 <small>دج</small></div>
-        <p>تفعيل لجهاز واحد</p>
-    </div>
+<div class="container">
     
-    <div class="card" data-price="900">
-        <h3>3 أشهر</h3>
-        <div class="price">900 <small>دج</small></div>
-        <p>توفير 15%</p>
+    <div id="clientDashboard" class="dashboard-section" style="display: none;">
+        <h3 style="margin-top: 0;"><i class="fas fa-history"></i> اشتراكاتي الأخيرة</h3>
+        <div id="ordersList">
+            </div>
     </div>
 
-    <div class="card" data-price="1500">
-        <h3>6 أشهر</h3>
-        <div class="price">1500 <small>دج</small></div>
-        <p>الخيار العائلي</p>
+    <div class="hero">
+        <h1>استمتع بأقوى سيرفر IPTV في الجزائر</h1>
+        <p>جودة 4K، ثبات تام، ودعم فني متواصل 24/7</p>
     </div>
 
-    <div class="card active popular" data-price="2500">
-        <h3>12 شهر</h3>
-        <div class="price">2500 <small>دج</small></div>
-        <p>أفضل توفير مالي</p>
+    <div class="plans">
+        <div class="card" data-price="400" data-plan="شهر واحد">
+            <h3>شهر واحد</h3>
+            <div class="price">400 <small>دج</small></div>
+        </div>
+        <div class="card" data-price="900" data-plan="3 أشهر">
+            <h3>3 أشهر</h3>
+            <div class="price">900 <small>دج</small></div>
+        </div>
+        <div class="card" data-price="1500" data-plan="6 أشهر">
+            <h3>6 أشهر</h3>
+            <div class="price">1500 <small>دج</small></div>
+        </div>
+        <div class="card active popular" data-price="2500" data-plan="12 شهر">
+            <h3>12 شهر</h3>
+            <div class="price">2500 <small>دج</small></div>
+        </div>
+    </div>
+
+    <div class="order-section">
+        <h3 style="margin-top: 0; text-align: center;">إتمام طلب الاشتراك</h3>
+        <input type="text" id="phone" placeholder="رقم الهاتف (WhatsApp)">
+        <button id="payBtn" onclick="handlePaymentClick()" style="width: 100%; padding: 18px; border-radius: 12px; border: none; background: var(--primary); color: white; font-size: 18px; font-weight: bold; cursor: pointer;">
+            ادفع الآن عبر البطاقة الذهبية / CIB
+        </button>
+        <div class="note">
+            ⚠️ <strong>تنبيه:</strong> سيصلك كود التفعيل مباشرة عبر بريدك الإلكتروني المسجل لدينا فور نجاح العملية.
+        </div>
     </div>
 </div>
 
-<div class="order-section">
-    <h3 style="text-align: center; margin-bottom: 25px;">إكمال عملية الطلب</h3>
-    <input type="text" id="phone" placeholder="رقم الهاتف (واتساب)">
-    <input type="email" id="email" placeholder="البريد الإلكتروني">
-    
-    <button id="payBtn" disabled>ادفع الآن عبر البطاقة الذهبية / CIB</button>
+<div id="authModal" class="modal">
+    <div class="modal-content">
+        <h3 id="modalTitle">إنشاء حساب جديد</h3>
+        
+        <div id="nameField">
+            <input type="text" id="authName" placeholder="الاسم الكامل">
+        </div>
+        <input type="email" id="authEmail" placeholder="البريد الإلكتروني">
+        <input type="password" id="authPassword" placeholder="كلمة المرور">
+        
+        <button class="auth-btn" id="mainAuthBtn" onclick="processEmailAuth()" style="width:100%; margin-bottom:10px; padding: 12px;">تأكيد</button>
+        
+        <div style="margin: 15px 0; opacity: 0.5; font-size: 13px;">أو عبر جوجل</div>
+        
+        <button onclick="loginWithGoogle()" style="width:100%; background:#fff; color:#000; border:1px solid #ddd; padding: 10px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: inherit; font-weight: 600;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="18">
+            متابعة باستخدام Google
+        </button>
 
-    <div class="note">
-        <strong>⚠️ ملاحظة هامة:</strong><br>
-        يرجى التأكد من صحة رقم الهاتف والبريد الإلكتروني بدقة. سيتم إرسال كود التفعيل وتعليمات التشغيل إلى **بريدك الإلكتروني** فور نجاح عملية الدفع.
+        <p id="toggleText" onclick="toggleAuthMode()" style="margin-top: 20px; font-size: 13px; color: var(--primary); cursor: pointer;">تملك حساب؟ سجل دخولك</p>
+        <button onclick="closeAuthModal()" style="margin-top: 15px; background: none; border: none; color: #94a3b8; cursor: pointer;">إلغاء</button>
     </div>
 </div>
-
-<footer>
-    <div class="social-links">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-telegram"></i></a>
-    </div>
-    <p>© 2024 Neo 4K Pro. جميع الحقوق محفوظة.</p>
-    <p style="font-size: 12px; color: #64748b;">نحن نضمن لك أفضل جودة بث في الجزائر</p>
-</footer>
 
 <a href="https://wa.me/213XXXXXXXXX" class="whatsapp-btn" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
 
-<script>
-    const cards = document.querySelectorAll(".card");
-    const phoneInput = document.getElementById("phone");
-    const emailInput = document.getElementById("email");
-    const btn = document.getElementById("payBtn");
+<footer>
+    <p>© 2026 Neo 4K Pro. جميع الحقوق محفوظة.</p>
+    <div style="margin-top: 10px; font-size: 18px; display: flex; justify-content: center; gap: 15px;">
+        <i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i> <i class="fab fa-telegram"></i>
+    </div>
+</footer>
 
-    let selectedPrice = "2500"; 
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { 
+        getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
+        onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, updateProfile 
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { 
+        getFirestore, doc, setDoc, getDoc, collection, query, where, onSnapshot, orderBy, serverTimestamp 
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    // اختيار البطاقات
-    cards.forEach(card => {
-        card.addEventListener("click", () => {
-            cards.forEach(c => c.classList.remove("active"));
-            card.classList.add("active");
+    // --- إعدادات Firebase (ضع بياناتك هنا) ---
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.appspot.com",
+        messagingSenderId: "YOUR_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const googleProvider = new GoogleAuthProvider();
+
+    let currentUser = null;
+    let isSignUpMode = true;
+    let selectedPrice = "2500";
+    let selectedPlan = "12 شهر";
+
+    // --- مراقبة حالة المستخدم ---
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            currentUser = user;
+            document.getElementById('authContainer').style.display = 'none';
+            document.getElementById('userProfile').style.display = 'flex';
+            document.getElementById('headerUserName').innerText = user.displayName || "العميل";
+            document.getElementById('clientDashboard').style.display = 'block';
+            loadOrders(user.uid);
+            closeAuthModal();
+        } else {
+            currentUser = null;
+            document.getElementById('authContainer').style.display = 'block';
+            document.getElementById('userProfile').style.display = 'none';
+            document.getElementById('clientDashboard').style.display = 'none';
+        }
+    });
+
+    // --- وظائف الهوية (Auth Functions) ---
+    window.openAuthModal = () => document.getElementById('authModal').style.display = 'flex';
+    window.closeAuthModal = () => document.getElementById('authModal').style.display = 'none';
+    
+    window.toggleAuthMode = () => {
+        isSignUpMode = !isSignUpMode;
+        document.getElementById('modalTitle').innerText = isSignUpMode ? "إنشاء حساب جديد" : "تسجيل الدخول";
+        document.getElementById('nameField').style.display = isSignUpMode ? "block" : "none";
+        document.getElementById('mainAuthBtn').innerText = isSignUpMode ? "تأكيد" : "دخول";
+        document.getElementById('toggleText').innerText = isSignUpMode ? "تملك حساب؟ سجل دخولك" : "ليس لديك حساب؟ سجل الآن";
+    };
+
+    window.processEmailAuth = async () => {
+        const email = document.getElementById('authEmail').value;
+        const pass = document.getElementById('authPassword').value;
+        const name = document.getElementById('authName').value;
+
+        try {
+            if (isSignUpMode) {
+                const res = await createUserWithEmailAndPassword(auth, email, pass);
+                await updateProfile(res.user, { displayName: name });
+                await syncUserToFirestore(res.user, name);
+            } else {
+                await signInWithEmailAndPassword(auth, email, pass);
+            }
+        } catch (e) { alert("خطأ: " + e.message); }
+    };
+
+    window.loginWithGoogle = async () => {
+        try {
+            const res = await signInWithPopup(auth, googleProvider);
+            await syncUserToFirestore(res.user);
+        } catch (e) { console.error(e); }
+    };
+
+    window.handleLogout = () => signOut(auth);
+
+    async function syncUserToFirestore(user, name = null) {
+        await setDoc(doc(db, "users", user.uid), {
+            uid: user.uid,
+            displayName: name || user.displayName,
+            email: user.email,
+            lastLogin: serverTimestamp()
+        }, { merge: true });
+    }
+
+    // --- وظائف الطلبات (Orders) ---
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => {
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
             selectedPrice = card.dataset.price;
-            validate();
+            selectedPlan = card.dataset.plan;
         });
     });
 
-    // التحقق من المدخلات
-    function validate() {
-        const phone = phoneInput.value.trim();
-        const email = emailInput.value.trim();
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        btn.disabled = !(selectedPrice && phone.length >= 10 && emailPattern.test(email));
-    }
+    window.handlePaymentClick = async () => {
+        if (!currentUser) { alert("يرجى تسجيل الدخول أولاً"); openAuthModal(); return; }
+        const phone = document.getElementById('phone').value;
+        if (phone.length < 10) { alert("يرجى إدخال رقم هاتف صحيح"); return; }
 
-    phoneInput.addEventListener("input", validate);
-    emailInput.addEventListener("input", validate);
-
-    // معالجة الدفع
-    btn.addEventListener("click", async () => {
+        const btn = document.getElementById('payBtn');
         btn.disabled = true;
-        btn.innerText = "⏳ جاري التحميل...";
+        btn.innerText = "جاري تحضير الطلب...";
 
         try {
+            const orderId = "NEO-" + Date.now().toString().slice(-6);
+            await setDoc(doc(db, "orders", orderId), {
+                uid: currentUser.uid,
+                orderId: orderId,
+                customerName: currentUser.displayName,
+                email: currentUser.email,
+                phone: phone,
+                plan: selectedPlan,
+                amount: selectedPrice,
+                status: "pending",
+                timestamp: serverTimestamp()
+            });
+
+            // هنا تضع رابط الـ Worker الخاص بك للدفع
             const res = await fetch("https://dz-card-payment.wizanecod.workers.dev/create-order", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    amount: parseInt(selectedPrice),
-                    phone: phoneInput.value,
-                    email: emailInput.value,
-                    service: "Neo 4K Pro"
-                })
+                body: JSON.stringify({ amount: selectedPrice, phone, email: currentUser.email, orderId })
             });
-
             const data = await res.json();
-            if (data.checkout_url) {
-                window.location.href = data.checkout_url;
-            } else {
-                throw new Error();
-            }
-        } catch {
-            btn.innerText = "ادفع الآن عبر البطاقة الذهبية / CIB";
-            btn.disabled = false;
-            alert("حدث خطأ أثناء معالجة الطلب، حاول مرة أخرى.");
-        }
-    });
+            if (data.checkout_url) window.location.href = data.checkout_url;
+            
+        } catch (e) { alert("خطأ في الاتصال"); btn.disabled = false; btn.innerText = "ادفع الآن"; }
+    };
+
+    function loadOrders(uid) {
+        const q = query(collection(db, "orders"), where("uid", "==", uid), orderBy("timestamp", "desc"));
+        onSnapshot(q, (snapshot) => {
+            const list = document.getElementById('ordersList');
+            list.innerHTML = '';
+            snapshot.forEach(doc => {
+                const order = doc.data();
+                list.innerHTML += `
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:15px; border-bottom:1px solid #334155;">
+                        <div>
+                            <div style="font-weight:bold;">${order.plan}</div>
+                            <div style="font-size:12px; opacity:0.6;">${order.orderId}</div>
+                        </div>
+                        <div style="text-align:left">
+                            <div style="color:var(--primary); font-weight:800;">${order.amount} دج</div>
+                            <span class="status-badge ${order.status === 'success' ? 'status-success' : 'status-pending'}">
+                                ${order.status === 'success' ? 'مكتمل' : 'قيد الانتظار'}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    }
 </script>
 
 </body>
