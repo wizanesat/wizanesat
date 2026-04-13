@@ -104,6 +104,69 @@
         .price { font-size: 32px; font-weight: 800; color: var(--primary); margin: 15px 0; }
         .price small { font-size: 14px; color: #94a3b8; }
 
+
+
+        /* تنسيق زر جوجل المطور */
+.google-login-btn {
+    width: 100%;
+    background: #ffffff;
+    color: #1e293b;
+    border: 2px solid #e2e8f0;
+    padding: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.google-login-btn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* تنسيق الفاصل البصري */
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 25px 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #334155;
+}
+
+.separator span {
+    padding: 0 15px;
+}
+
+/* تحسين حقول الإدخال */
+.auth-input {
+    background: #0f172a !important;
+    border: 1px solid #334155 !important;
+    padding: 14px !important;
+    margin-bottom: 12px !important;
+    transition: 0.3s;
+}
+
+.auth-input:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+        
         /* Dashboard & Form */
         .order-section, .dashboard-section {
             background: var(--card);
@@ -213,45 +276,36 @@
 
 <div id="authModal" class="modal">
     <div class="modal-content">
-        <h3 id="modalTitle">إنشاء حساب جديد</h3>
-        
-        <div id="nameField">
-            <input type="text" id="authName" placeholder="الاسم الكامل">
-        </div>
-        <input type="email" id="authEmail" placeholder="البريد الإلكتروني">
-        <input type="password" id="authPassword" placeholder="كلمة المرور">
-        
-        <button class="auth-btn" id="mainAuthBtn" onclick="processEmailAuth()" style="width:100%; margin-bottom:10px; padding: 12px;">تأكيد</button>
-        
-        <div style="margin: 15px 0; opacity: 0.5; font-size: 13px;">أو عبر جوجل</div>
-        
-        <button onclick="loginWithGoogle()" style="
-    width: 100%; 
-    background: #ffffff; 
-    color: #1f2937; 
-    border: 1px solid #d1d5db; 
-    padding: 12px; 
-    border-radius: 12px; 
-    cursor: pointer; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 12px; 
-    font-family: 'Cairo', sans-serif; 
-    font-weight: 700;
-    font-size: 15px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    transition: 0.3s;
-" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='#ffffff'">
-    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20" alt="Google Logo">
-    المتابعة باستخدام Google
-</button>
+        <h3 id="modalTitle" style="margin-bottom: 25px; font-weight: 800;">انضم إلينا الآن</h3>
 
-        <p id="toggleText" onclick="toggleAuthMode()" style="margin-top: 20px; font-size: 13px; color: var(--primary); cursor: pointer;">تملك حساب؟ سجل دخولك</p>
-        <button onclick="closeAuthModal()" style="margin-top: 15px; background: none; border: none; color: #94a3b8; cursor: pointer;">إلغاء</button>
+        <button onclick="loginWithGoogle()" class="google-login-btn">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20">
+            المتابعة باستخدام Google
+        </button>
+
+        <div class="separator">
+            <span>أو عبر البريد الإلكتروني</span>
+        </div>
+
+        <div id="nameField">
+            <input type="text" id="authName" placeholder="الاسم الكامل" class="auth-input">
+        </div>
+        <input type="email" id="authEmail" placeholder="البريد الإلكتروني" class="auth-input">
+        <input type="password" id="authPassword" placeholder="كلمة المرور" class="auth-input">
+        
+        <button class="auth-btn" id="mainAuthBtn" onclick="processEmailAuth()" style="width:100%; padding: 14px; font-size: 16px;">
+            إنشاء الحساب
+        </button>
+
+        <p id="toggleText" onclick="toggleAuthMode()" style="margin-top: 20px; font-size: 14px; color: var(--primary); cursor: pointer; font-weight: 600;">
+            تملك حساب بالفعل؟ سجل دخولك
+        </p>
+
+        <button onclick="closeAuthModal()" style="margin-top: 15px; background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 13px;">
+            إغلاق النافذة
+        </button>
     </div>
 </div>
-    
 
 <a href="https://wa.me/213XXXXXXXXX" class="whatsapp-btn" target="_blank">
     <i class="fab fa-whatsapp"></i>
