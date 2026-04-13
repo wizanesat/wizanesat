@@ -62,6 +62,8 @@
 
         .auth-btn:hover { background: var(--primary-hover); }
 
+      
+
         /* Hero Section */
         .hero { text-align: center; padding: 60px 20px; }
         .hero h1 { font-size: clamp(24px, 5vw, 40px); margin-bottom: 15px; background: linear-gradient(90deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -222,11 +224,30 @@
         <button class="auth-btn" id="mainAuthBtn" onclick="processEmailAuth()" style="width:100%; margin-bottom:10px; padding: 12px;">تأكيد</button>
         
         <div style="margin: 15px 0; opacity: 0.5; font-size: 13px;">أو عبر جوجل</div>
+
+
+        <button onclick="loginWithGoogle()" style="
+    width: 100%; 
+    background: #ffffff; 
+    color: #1f2937; 
+    border: 1px solid #d1d5db; 
+    padding: 12px; 
+    border-radius: 12px; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 12px; 
+    font-family: 'Cairo', sans-serif; 
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: 0.3s;
+" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='#ffffff'">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20" alt="Google Logo">
+    المتابعة باستخدام Google
+</button>
         
-        <button onclick="loginWithGoogle()" style="width:100%; background:#fff; color:#000; border:1px solid #ddd; padding: 10px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: inherit; font-weight: 600;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="18">
-            متابعة باستخدام Google
-        </button>
 
         <p id="toggleText" onclick="toggleAuthMode()" style="margin-top: 20px; font-size: 13px; color: var(--primary); cursor: pointer;">تملك حساب؟ سجل دخولك</p>
         <button onclick="closeAuthModal()" style="margin-top: 15px; background: none; border: none; color: #94a3b8; cursor: pointer;">إلغاء</button>
