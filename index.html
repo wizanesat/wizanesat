@@ -4,27 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neo 4K Pro | اشتراكات IPTV العالمية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
-            --bg: #f8fafc;
-            --card: #ffffff;
-            --text: #1e293b;
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --accent: #f59e0b;
-            --border: #e2e8f0;
-            --glass: rgba(255, 255, 255, 0.8);
-        }
-
-        body.dark {
+            /* الألوان الداكنة افتراضياً */
             --bg: #0f172a;
             --card: #1e293b;
             --text: #f1f5f9;
-            --primary: #818cf8;
-            --primary-hover: #6366f1;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent: #f59e0b;
             --border: #334155;
-            --glass: rgba(30, 41, 59, 0.8);
+            --glass: rgba(30, 41, 59, 0.9);
         }
 
         body {
@@ -32,74 +25,54 @@
             font-family: 'Cairo', sans-serif;
             background: var(--bg);
             color: var(--text);
-            transition: 0.3s;
             line-height: 1.6;
         }
 
-        /* Header & Logo */
-        .header {
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .logo-text {
-            font-size: 32px;
-            font-weight: 800;
-            background: linear-gradient(90deg, var(--primary), #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
-
-        .badge {
-            background: var(--accent);
-            color: #000;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        /* Dark Mode Toggle */
-        .toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            cursor: pointer;
+        /* Header */
+        header {
             background: var(--card);
-            border: 1px solid var(--border);
-            padding: 10px;
-            border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-
-        /* Features Section */
-        .features {
+            padding: 20px;
             display: flex;
             justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-            padding: 0 20px;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .feat-item {
-            font-size: 14px;
-            background: var(--glass);
-            padding: 8px 15px;
-            border-radius: 50px;
-            border: 1px solid var(--border);
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         /* Pricing Cards */
         .plans {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 20px;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -107,170 +80,221 @@
         .card {
             background: var(--card);
             padding: 30px 20px;
-            border-radius: 24px;
+            border-radius: 20px;
             cursor: pointer;
             border: 2px solid var(--border);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.3s;
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            border-color: var(--primary);
         }
 
         .card.active {
             border-color: var(--primary);
-            background: var(--glass);
-            transform: scale(1.05);
+            background: rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
         }
 
+        /* شريط الأكثر مبيعاً جهة اليسار */
         .card.popular::before {
             content: "الأكثر مبيعاً";
             position: absolute;
-            top: 15px;
-            right: -30px;
+            top: 18px;
+            left: -35px; /* تم التعديل لليسار */
             background: var(--accent);
             color: #000;
-            padding: 5px 35px;
-            transform: rotate(45deg);
-            font-size: 12px;
+            padding: 5px 40px;
+            transform: rotate(-45deg); /* تدوير عكسي لليناسب اليسار */
+            font-size: 11px;
             font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
-        .card h3 { margin: 0; font-size: 20px; }
-        
         .price {
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 800;
-            margin: 15px 0;
             color: var(--primary);
+            margin: 10px 0;
         }
 
-        .price span { font-size: 16px; color: var(--text); opacity: 0.7; }
+        .price small { font-size: 14px; color: #94a3b8; }
 
-        /* Form Styling */
-        .form-container {
-            max-width: 450px;
+        /* Form */
+        .order-section {
+            max-width: 500px;
             margin: 40px auto;
             padding: 30px;
             background: var(--card);
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-radius: 25px;
+            border: 1px solid var(--border);
         }
 
         input {
             width: 100%;
-            padding: 14px;
-            margin: 10px 0;
+            padding: 15px;
+            margin-bottom: 15px;
             border-radius: 12px;
             border: 1px solid var(--border);
-            background: var(--bg);
-            color: var(--text);
+            background: #0f172a;
+            color: #fff;
             box-sizing: border-box;
             font-family: inherit;
         }
 
-        input:focus {
-            outline: 2px solid var(--primary);
-            border-color: transparent;
+        .note {
+            background: rgba(245, 158, 11, 0.1);
+            border-right: 4px solid var(--accent);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-top: 20px;
+            text-align: right;
         }
 
         button {
             width: 100%;
-            margin-top: 20px;
-            padding: 16px;
-            border: none;
+            padding: 18px;
             border-radius: 12px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            border: none;
+            background: var(--primary);
             color: white;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
         }
 
-        button:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px rgba(99, 102, 241, 0.4);
+        button:disabled { background: #475569; opacity: 0.6; }
+
+        /* Footer */
+        footer {
+            background: #0a0f1e;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: 60px;
         }
 
-        button:disabled {
-            background: #cbd5e1;
-            cursor: not-allowed;
-            box-shadow: none;
+        .social-links {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
-        .secure-info {
-            margin-top: 15px;
-            font-size: 12px;
-            opacity: 0.7;
+        .social-links a {
+            color: #94a3b8;
+            font-size: 24px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover { color: var(--primary); }
+
+        /* Floating WhatsApp */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 28px; }
+            .plans { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-
 <body>
 
-<div class="toggle" onclick="toggleDark()" id="themeToggle">🌙</div>
-
-<header class="header">
-    <div class="badge">سيرفر Neo 4K Pro الأصلي</div>
-    <div class="logo-text">استمتع بعالم الترفيه</div>
-    <p>أكثر من 10,000 قناة بجودة 4K و مكتبة أفلام متجددة</p>
+<header>
+    <a href="#" class="logo">
+        <i class="fas fa-play-circle"></i> NEO <span>4K PRO</span>
+    </a>
 </header>
 
-<div class="features">
-    <span class="feat-item">✔️ بدون تقطيع</span>
-    <span class="feat-item">✔️ جودة 4K/Ultra HD</span>
-    <span class="feat-item">✔️ دعم فني 24/7</span>
-    <span class="feat-item">✔️ تفعيل فوري</span>
+<div class="hero">
+    <h1>اختر خطة اشتراكك المفضلة</h1>
+    <p>بث مباشر لجميع القنوات العالمية والعربية بجودة Ultra HD</p>
 </div>
 
 <div class="plans">
     <div class="card" data-price="400">
-        <h3>1 شهر</h3>
-        <div class="price">400 <span>دج</span></div>
-        <p style="font-size: 13px;">تجربة كاملة لمدة شهر</p>
+        <h3>شهر واحد</h3>
+        <div class="price">400 <small>دج</small></div>
+        <p>تفعيل لجهاز واحد</p>
     </div>
     
-    <div class="card popular" data-price="1500">
+    <div class="card" data-price="900">
+        <h3>3 أشهر</h3>
+        <div class="price">900 <small>دج</small></div>
+        <p>توفير 15%</p>
+    </div>
+
+    <div class="card" data-price="1500">
         <h3>6 أشهر</h3>
-        <div class="price">1500 <span>دج</span></div>
-        <p style="font-size: 13px;">الخيار الأكثر توازناً</p>
+        <div class="price">1500 <small>دج</small></div>
+        <p>الخيار العائلي</p>
     </div>
 
-    <div class="card active" data-price="2500">
+    <div class="card active popular" data-price="2500">
         <h3>12 شهر</h3>
-        <div class="price">2500 <span>دج</span></div>
-        <p style="font-size: 13px;">أفضل قيمة مقابل سعر</p>
+        <div class="price">2500 <small>دج</small></div>
+        <p>أفضل توفير مالي</p>
     </div>
 </div>
 
-<div class="form-container">
-    <h3 style="margin-top:0">بيانات الاشتراك</h3>
-    <input type="text" id="phone" placeholder="رقم الهاتف (WhatsApp)">
-    <input type="email" id="email" placeholder="البريد الإلكتروني لاستلام الكود">
-    <button id="payBtn" disabled>إتمام الطلب والدفع</button>
-    <div class="secure-info">
-        🔒 دفع آمن ومشفر 100%
+<div class="order-section">
+    <h3 style="text-align: center; margin-bottom: 25px;">إكمال عملية الطلب</h3>
+    <input type="text" id="phone" placeholder="رقم الهاتف (واتساب)">
+    <input type="email" id="email" placeholder="البريد الإلكتروني">
+    
+    <button id="payBtn" disabled>ادفع الآن عبر البطاقة الذهبية / CIB</button>
+
+    <div class="note">
+        <strong>⚠️ ملاحظة هامة:</strong><br>
+        يرجى التأكد من صحة رقم الهاتف والبريد الإلكتروني بدقة. سيتم إرسال كود التفعيل وتعليمات التشغيل إلى **بريدك الإلكتروني** فور نجاح عملية الدفع.
     </div>
 </div>
+
+<footer>
+    <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-telegram"></i></a>
+    </div>
+    <p>© 2024 Neo 4K Pro. جميع الحقوق محفوظة.</p>
+    <p style="font-size: 12px; color: #64748b;">نحن نضمن لك أفضل جودة بث في الجزائر</p>
+</footer>
+
+<a href="https://wa.me/213XXXXXXXXX" class="whatsapp-btn" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
 <script>
     const cards = document.querySelectorAll(".card");
-    const phone = document.getElementById("phone");
-    const email = document.getElementById("email");
+    const phoneInput = document.getElementById("phone");
+    const emailInput = document.getElementById("email");
     const btn = document.getElementById("payBtn");
-    const themeToggle = document.getElementById("themeToggle");
 
-    let selectedPrice = "2500"; // القيمة الافتراضية للبطاقة النشطة
+    let selectedPrice = "2500"; 
 
+    // اختيار البطاقات
     cards.forEach(card => {
         card.addEventListener("click", () => {
             cards.forEach(c => c.classList.remove("active"));
@@ -280,23 +304,22 @@
         });
     });
 
+    // التحقق من المدخلات
     function validate() {
-        const isPhoneValid = phone.value.length >= 10;
-        const isEmailValid = email.value.includes('@');
-        btn.disabled = !(selectedPrice && isPhoneValid && isEmailValid);
+        const phone = phoneInput.value.trim();
+        const email = emailInput.value.trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        btn.disabled = !(selectedPrice && phone.length >= 10 && emailPattern.test(email));
     }
 
-    phone.addEventListener("input", validate);
-    email.addEventListener("input", validate);
+    phoneInput.addEventListener("input", validate);
+    emailInput.addEventListener("input", validate);
 
-    function toggleDark() {
-        document.body.classList.toggle("dark");
-        themeToggle.innerText = document.body.classList.contains("dark") ? "☀️" : "🌙";
-    }
-
+    // معالجة الدفع
     btn.addEventListener("click", async () => {
         btn.disabled = true;
-        btn.innerText = "⏳ جاري تحويلك للدفع...";
+        btn.innerText = "⏳ جاري التحميل...";
 
         try {
             const res = await fetch("https://dz-card-payment.wizanecod.workers.dev/create-order", {
@@ -304,9 +327,9 @@
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     amount: parseInt(selectedPrice),
-                    phone: phone.value,
-                    email: email.value,
-                    product: "Neo 4K Pro"
+                    phone: phoneInput.value,
+                    email: emailInput.value,
+                    service: "Neo 4K Pro"
                 })
             });
 
@@ -317,9 +340,9 @@
                 throw new Error();
             }
         } catch {
-            btn.innerText = "إتمام الطلب والدفع";
+            btn.innerText = "ادفع الآن عبر البطاقة الذهبية / CIB";
             btn.disabled = false;
-            alert("عذراً، حدث خطأ في الاتصال. يرجى المحاولة لاحقاً.");
+            alert("حدث خطأ أثناء معالجة الطلب، حاول مرة أخرى.");
         }
     });
 </script>
