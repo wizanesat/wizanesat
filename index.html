@@ -1,0 +1,147 @@
+<style>
+body {
+  font-family: Arial;
+  background: #f5f7fb;
+  text-align: center;
+  padding: 20px;
+}
+
+/* 🧾 البطاقات */
+.plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card.active {
+  border: 2px solid #007bff;
+  background: #eef5ff;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* 🧾 الفورم */
+.form {
+  margin-top: 25px;
+}
+
+input {
+  width: 260px;
+  padding: 10px;
+  margin: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* 🔘 الزر */
+button {
+  margin-top: 15px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: gray;
+}
+</style>
+
+<h2>اختر اشتراكك</h2>
+
+<div class="plans">
+  <div class="card" data-price="400">شهر<div class="price">400 دج</div></div>
+  <div class="card" data-price="900">3 أشهر<div class="price">900 دج</div></div>
+  <div class="card" data-price="1500">6 أشهر<div class="price">1500 دج</div></div>
+  <div class="card" data-price="2500">12 شهر<div class="price">2500 دج</div></div>
+</div>
+
+<div class="form">
+  <input type="text" id="phone" placeholder="رقم الهاتف"><br>
+  <input type="email" id="email" placeholder="البريد الإلكتروني"><br>
+  <button id="payBtn" disabled>ادفع الآن</button>
+</div>
+
+<script>
+const cards = document.querySelectorAll(".card");
+const phone = document.getElementById("phone");
+const email = document.getElementById("email");
+const btn = document.getElementById("payBtn");
+
+let selectedPrice = null;
+
+// اختيار الاشتراك
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+    cards.forEach(c => c.classList.remove("active"));
+    card.classList.add("active");
+    selectedPrice = card.dataset.price;
+    validate();
+  });
+});
+
+// تفعيل الزر
+function validate() {
+  btn.disabled = !(selectedPrice && phone.value && email.value);
+}
+
+phone.addEventListener("input", validate);
+email.addEventListener("input", validate);
+
+// الدفع
+btn.addEventListener("click", async () => {
+  btn.disabled = true;
+  btn.innerText = "⏳ جارٍ المعالجة...";
+
+  try {
+    const res = await fetch("https://dz-card-payment.wizanecod.workers.dev/create-order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        amount: parseInt(selectedPrice),
+        phone: phone.value,
+        email: email.value
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.checkout_url) {
+      window.location.href = data.checkout_url;
+    } else {
+      btn.innerText = "ادفع الآن";
+      btn.disabled = false;
+      alert("خطأ في إنشاء الدفع");
+    }
+
+  } catch (err) {
+    btn.innerText = "ادفع الآن";
+    btn.disabled = false;
+    alert("فشل الاتصال بالسيرفر");
+  }
+});
+</script>
