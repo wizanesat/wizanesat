@@ -213,36 +213,45 @@
 
 <div id="authModal" class="modal">
     <div class="modal-content">
-        <h3 id="modalTitle" style="margin-bottom: 25px; font-weight: 800;">انضم إلينا الآن</h3>
-
-        <button onclick="loginWithGoogle()" class="google-login-btn">
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20">
-            المتابعة باستخدام Google
-        </button>
-
-        <div class="separator">
-            <span>أو عبر البريد الإلكتروني</span>
-        </div>
-
-        <div id="nameField">
-            <input type="text" id="authName" placeholder="الاسم الكامل" class="auth-input">
-        </div>
-        <input type="email" id="authEmail" placeholder="البريد الإلكتروني" class="auth-input">
-        <input type="password" id="authPassword" placeholder="كلمة المرور" class="auth-input">
+        <h3 id="modalTitle">إنشاء حساب جديد</h3>
         
-        <button class="auth-btn" id="mainAuthBtn" onclick="processEmailAuth()" style="width:100%; padding: 14px; font-size: 16px;">
-            إنشاء الحساب
-        </button>
+        <div id="nameField">
+            <input type="text" id="authName" placeholder="الاسم الكامل">
+        </div>
+        <input type="email" id="authEmail" placeholder="البريد الإلكتروني">
+        <input type="password" id="authPassword" placeholder="كلمة المرور">
+        
+        <button class="auth-btn" id="mainAuthBtn" onclick="processEmailAuth()" style="width:100%; margin-bottom:10px; padding: 12px;">تأكيد</button>
+        
+        <div style="margin: 15px 0; opacity: 0.5; font-size: 13px;">أو عبر جوجل</div>
+        
+        <button onclick="loginWithGoogle()" style="
+    width: 100%; 
+    background: #ffffff; 
+    color: #1f2937; 
+    border: 1px solid #d1d5db; 
+    padding: 12px; 
+    border-radius: 12px; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 12px; 
+    font-family: 'Cairo', sans-serif; 
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: 0.3s;
+" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='#ffffff'">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20" alt="Google Logo">
+    المتابعة باستخدام Google
+</button>
 
-        <p id="toggleText" onclick="toggleAuthMode()" style="margin-top: 20px; font-size: 14px; color: var(--primary); cursor: pointer; font-weight: 600;">
-            تملك حساب بالفعل؟ سجل دخولك
-        </p>
-
-        <button onclick="closeAuthModal()" style="margin-top: 15px; background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 13px;">
-            إغلاق النافذة
-        </button>
+        <p id="toggleText" onclick="toggleAuthMode()" style="margin-top: 20px; font-size: 13px; color: var(--primary); cursor: pointer;">تملك حساب؟ سجل دخولك</p>
+        <button onclick="closeAuthModal()" style="margin-top: 15px; background: none; border: none; color: #94a3b8; cursor: pointer;">إلغاء</button>
     </div>
 </div>
+    
 
 <a href="https://wa.me/213XXXXXXXXX" class="whatsapp-btn" target="_blank">
     <i class="fab fa-whatsapp"></i>
