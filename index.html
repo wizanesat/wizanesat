@@ -319,6 +319,15 @@
 </footer>
 
 <script type="module">
+// يوضع داخل script صفحة index.html
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('error') === 'unauthorized') {
+        alert("⚠️ يرجى تسجيل الدخول بحساب الإدارة للوصول لهذه الصفحة.");
+        openAuthModal(); // فتح نافذة الدخول تلقائياً
+    }
+};
+    
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { 
         getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
