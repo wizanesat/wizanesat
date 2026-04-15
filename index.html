@@ -359,6 +359,16 @@
             document.getElementById('clientDashboard').style.display = 'block';
             loadOrders(user.uid);
             closeAuthModal();
+// إذا كان الداخل هو الأدمن، أظهر له زر لوحة التحكم
+        if (user.email === "wizanesat@gmail.com") {
+            const adminBtn = document.createElement('button');
+            adminBtn.innerHTML = '<i class="fas fa-user-shield"></i> لوحة الأدمن';
+            adminBtn.className = 'auth-btn';
+            adminBtn.style.background = '#f59e0b'; // لون مميز للأدمن
+            adminBtn.onclick = () => window.location.href = 'admin.html';
+            document.getElementById('userProfile').prepend(adminBtn);
+        }
+            
         } else {
             currentUser = null;
             document.getElementById('authContainer').style.display = 'block';
