@@ -175,29 +175,41 @@
   });
 
 
+window.startPayment = async function(amount, packageName) {
+    const user = auth.currentUser; // التحقق من تسجيل الدخول
 
-
-async function startPayment(amount, name) {
-    const user = auth.currentUser;
     if (!user) {
-        alert("يرجى تسجيل الدخول أولاً!");
+        alert("يرجى تسجيل الدخول أولاً باستخدام حساب جوجل!");
         return;
     }
 
-    // إرسال طلب لإنشاء فاتورة
-    const res = await fetch('/api/pay', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: amount, packageName: name })
-    });
+    try {
+        // تغيير نص الزر ليشعر العميل أن العملية جارية
+        console.log("جاري إنشاء طلب الدفع...");
+        
+        const response = await fetch('/api/pay', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                amount: amount, 
+                packageName: packageName,
+                userEmail: user.email 
+            })
+        });
 
-    const data = await res.json();
-    if (data.checkout_url) {
-        window.location.href = data.checkout_url; // التوجه لصفحة الدفع بالذهبية
+        const data = await response.json();
+
+        if (data.checkout_url) {
+            window.location.href = data.checkout_url; // الانتقال لصفحة شارجيلي
+        } else {
+            console.error("خطأ من السيرفر:", data);
+            alert("حدث خطأ في الاتصال ببوابة الدفع.");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("تأكد من رفع الموقع على Vercel، الروابط البرمجية لا تعمل بفتح الملف مباشرة.");
     }
 }
-
-// ربط الوظيفة بأزرار الباقات
 // مثال للباقة الأولى: onclick="startPayment(1200, 'اشتراك 3 أشهر')"
 
 
