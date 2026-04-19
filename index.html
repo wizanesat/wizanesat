@@ -153,7 +153,46 @@
       loginBtn.innerHTML = "تسجيل الدخول";
     }
   });
+
+
+
+
+async function startPayment(amount, name) {
+    const user = auth.currentUser;
+    if (!user) {
+        alert("يرجى تسجيل الدخول أولاً!");
+        return;
+    }
+
+    // إرسال طلب لإنشاء فاتورة
+    const res = await fetch('/api/pay', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: amount, packageName: name })
+    });
+
+    const data = await res.json();
+    if (data.checkout_url) {
+        window.location.href = data.checkout_url; // التوجه لصفحة الدفع بالذهبية
+    }
+}
+
+// ربط الوظيفة بأزرار الباقات
+// مثال للباقة الأولى: onclick="startPayment(1200, 'اشتراك 3 أشهر')"
+
+
+
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+const db = getFirestore(app);
+
+async function logOrder(userId, packageName) {
+    await addDoc(collection(db, "orders"), {
+        uid: userId,
+        package: packageName,
+        status: "pending",
+        date: new Date()
+    });
+}
+
 </script>
 
-</body>
-</html>
