@@ -214,5 +214,60 @@ async function logOrder(userId, packageName) {
     });
 }
 
+import { query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// دالة لجلب وعرض طلبات العميل
+async function loadUserOrders(userId) {
+    const ordersTableBody = document.getElementById('ordersTableBody');
+    const userOrdersSection = document.getElementById('userOrders');
+    
+    // استعلام لجلب طلبات المستخدم الحالي فقط مرتبة من الأحدث
+    const q = query(collection(db, "orders"), where("uid", "==", userId), orderBy("date", "desc"));
+    const querySnapshot = await getDocs(q);
+    
+    ordersTableBody.innerHTML = ""; // مسح الجدول القديم
+    userOrdersSection.classList.remove('d-none'); // إظهار القسم
+
+    querySnapshot.forEach((doc) => {
+        const order = doc.data();
+        const date = order.date.toDate().toLocaleDateString('ar-DZ');
+        
+        // التحقق مما إذا كان الطلب مكتملاً لإظهار خانة الكود
+        let statusBadge = `<span class="badge bg-warning">قيد الانتظار</span>`;
+        let codeContent = `<span class="text-muted small">يظهر بعد الدفع</span>`;
+
+        if (order.status === "completed") {
+            statusBadge = `<span class="badge bg-success">تم الدفع</span>`;
+            // الخانة الخاصة التي تظهر للعميل عند اكتمال الطلب
+            codeContent = `
+                <div class="bg-light text-dark p-2 rounded fw-bold border-start border-primary border-4">
+                    ${order.iptv_code || "جاري توليد الكود..."}
+                </div>`;
+        }
+
+        const row = `
+            <tr>
+                <td>${order.package}</td>
+                <td>${date}</td>
+                <td>${statusBadge}</td>
+                <td>${codeContent}</td>
+            </tr>
+        `;
+        ordersTableBody.innerHTML += row;
+    });
+}
+
+// تحديث مراقب الحالة (onAuthStateChanged) ليقوم بجلب البيانات فور دخول المستخدم
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        loginBtn.innerHTML = `خروج`;
+        loadUserOrders(user.uid); // جلب الطلبات
+    } else {
+        loginBtn.innerHTML = "تسجيل الدخول";
+        document.getElementById('userOrders').classList.add('d-none');
+    }
+});
+    
+
 </script>
 
