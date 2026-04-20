@@ -1,13 +1,16 @@
+// api/pay.js
 export default async function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ message: 'Method Not Allowed' });
-    }
+    if (req.method !== 'POST') return res.status(405).json({ message: 'Method Not Allowed' });
 
     try {
         const { amount, packageName } = req.body;
 
-        // تأكد من تحويل المبلغ لرقم صحيح (إلزامي لـ Chargily)
-        const finalAmount = parseInt(amount);
+        // تحويل المبلغ إلى رقم صحيح (Chargily لا تقبل الكسور أو النصوص)
+        const unitAmount = parseInt(amount);
+
+        // رابط الموقع الديناميكي (تأكد أن موقعك يعمل بـ HTTPS على Vercel)
+        const host = req.headers['x-forwarded-host'] || req.headers.host;
+        const successUrl = `https://${host}/success.html`;
 
         const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', {
             method: 'POST',
@@ -20,7 +23,7 @@ export default async function handler(req, res) {
                     {
                         "price_data": {
                             "currency": "dzd",
-                            "unit_amount": finalAmount,
+                            "unit_amount": unitAmount,
                             "product_data": {
                                 "name": packageName
                             }
@@ -28,8 +31,7 @@ export default async function handler(req, res) {
                         "quantity": 1
                     }
                 ],
-                // استعمل رابط مباشر مؤقتاً للتأكد من الصحة أو تأكد من req.headers.host
-                "success_url": `https://${req.headers.host}/success.html`
+                "success_url": successUrl
             }),
         });
 
@@ -38,14 +40,12 @@ export default async function handler(req, res) {
         if (response.ok) {
             return res.status(200).json({ checkout_url: data.checkout_url });
         } else {
-            // هنا سنطبع الخطأ الحقيقي القادم من Chargily لنعرف أي حقل هو السبب
-            console.error("Chargily Detailed Error:", data);
-            return res.status(response.status).json({ 
-                message: 'Chargily Server Error', 
-                errors: data.errors // هذا الحقل سيخبرنا أين المشكلة بالضبط (مثلاً في العملة أو الرابط)
-            });
+            // طباعة تفاصيل الخطأ في Vercel Logs لمعرفة الحقل المرفوض بالضبط
+            console.error("DEBUG CHARGILY:", JSON.stringify(data, null, 2));
+            return res.status(response.status).json(data);
         }
     } catch (error) {
+        console.error("CRITICAL ERROR:", error);
         return res.status(500).json({ message: 'Internal Server Error' });
     }
 }
