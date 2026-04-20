@@ -3,132 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPTV Pro - أفضل اشتراكات IPTV في الجزائر</title>
+    <title>Wizanetech IPTV - متجرك الموثوق</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #0f172a;
-            color: #ffffff;
-        }
-        .navbar {
-            background-color: rgba(15, 23, 42, 0.95);
-            border-bottom: 1px solid #1e293b;
-        }
-        .hero-section {
-            padding: 100px 0;
-            background: linear-gradient(45deg, #1e293b 0%, #0f172a 100%);
-        }
-        .card {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            transition: transform 0.3s ease;
-            color: white;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: #38bdf8;
-        }
-        .btn-primary {
-            background-color: #38bdf8;
-            border: none;
-        }
-        .price-tag {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #38bdf8;
-        }
+        body { font-family: 'Cairo', sans-serif; background-color: #0f172a; color: white; }
+        .card { background-color: #1e293b; border: none; transition: transform 0.3s; color: white; }
+        .card:hover { transform: translateY(-10px); }
+        .btn-primary { background-color: #3b82f6; border: none; }
+        .status-badge { font-size: 0.8rem; padding: 5px 10px; border-radius: 20px; }
+        #userOrders { background-color: #111827; border-radius: 15px; padding: 20px; margin-top: 50px; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">IPTV <span style="color: #38bdf8;">PRO</span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-nav-item"><a class="nav-link active" href="#">الرئيسية</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#pricing">الباقات</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" id="loginBtn">تسجيل الدخول</a></li>
-                </ul>
+            <a class="navbar-brand fw-bold" href="#">Wizanetech <span class="text-primary">IPTV</span></a>
+            <div class="d-flex align-items-center">
+                <span id="userDisplayName" class="text-light me-3 small"></span>
+                <button id="loginBtn" class="btn btn-outline-primary btn-sm">تسجيل الدخول</button>
             </div>
         </div>
     </nav>
 
-    <section class="hero-section text-center">
+    <header class="py-5 text-center">
         <div class="container">
-            <h1 class="display-4 fw-bold mb-4">استمتع بأقوى القنوات العالمية بدون تقطيع</h1>
-            <p class="lead mb-5">اشتراكات IPTV عالية الجودة تضم أكثر من 10,000 قناة ومكتبة أفلام ضخمة.</p>
-            <a href="#pricing" class="btn btn-primary btn-lg px-5 py-3">اختر باقتك الآن</a>
+            <h1 class="display-4 fw-bold">أفضل اشتراكات IPTV في الجزائر</h1>
+            <p class="lead">بث مباشر بدون تقطيع، بجودة 4K، ودعم فني متواصل.</p>
         </div>
-    </section>
+    </header>
 
-    <section id="pricing" class="py-5">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100 p-4 text-center">
-                        <h3>اشتراك 3 أشهر</h3>
-                        <div class="price-tag">1200 <small style="font-size: 1rem;">دج</small></div>
-                        <ul class="list-unstyled my-4">
-                            <li><i class="fas fa-check text-success me-2"></i> جودة 4K / Ultra HD</li>
-                            <li><i class="fas fa-check text-success me-2"></i> دعم فني 24/7</li>
-                            <li><i class="fas fa-check text-success me-2"></i> جميع القنوات الرياضية</li>
-                        </ul>
-                             <button class="btn btn-primary w-100" onclick="startPayment(1200, 'اشتراك 3 أشهر')">اشتري الآن</button> 
-                    </div>
+    <section class="container py-5">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 p-4 text-center">
+                    <h3>3 أشهر</h3>
+                    <div class="display-5 my-3">1200 <small>دج</small></div>
+                    <ul class="list-unstyled mb-4">
+                        <li>+12,000 قناة</li>
+                        <li>جودة FHD/4K</li>
+                        <li>تحديثات يومية</li>
+                    </ul>
+                    <button class="btn btn-primary btn-lg" onclick="startPayment(1200, 'اشتراك 3 أشهر')">اشترك الآن</button>
                 </div>
-                <div class="col-md-4">
-                    <div class="card h-100 p-4 text-center border-primary shadow-lg" style="border-width: 2px;">
-                        <span class="badge bg-primary mb-3">الأكثر مبيعاً</span>
-                        <h3>اشتراك سنة</h3>
-                        <div class="price-tag">3500 <small style="font-size: 1rem;">دج</small></div>
-                        <ul class="list-unstyled my-4">
-                            <li><i class="fas fa-check text-success me-2"></i> جودة 4K / Ultra HD</li>
-                            <li><i class="fas fa-check text-success me-2"></i> مكتبة أفلام ومسلسلات</li>
-                            <li><i class="fas fa-check text-success me-2"></i> ثبات عالي جداً</li>
-                        </ul>
-              <button class="btn btn-primary w-100" onclick="startPayment(3500, 'اشتراك سنة')">اشتري الآن</button>           
-                    </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 p-4 text-center border-primary border-2">
+                    <span class="badge bg-primary mb-2 w-50 mx-auto">الأكثر طلباً</span>
+                    <h3>6 أشهر</h3>
+                    <div class="display-5 my-3">2200 <small>دج</small></div>
+                    <ul class="list-unstyled mb-4">
+                        <li>جميع القنوات الرياضية</li>
+                        <li>مكتبة أفلام ضخمة</li>
+                        <li>دعم فني 24/7</li>
+                    </ul>
+                    <button class="btn btn-primary btn-lg" onclick="startPayment(2200, 'اشتراك 6 أشهر')">اشترك الآن</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 p-4 text-center">
+                    <h3>12 شهر</h3>
+                    <div class="display-5 my-3">3500 <small>دج</small></div>
+                    <ul class="list-unstyled mb-4">
+                        <li>باقة كاملة VIP</li>
+                        <li>جهازين في نفس الوقت</li>
+                        <li>ثبات رهيب</li>
+                    </ul>
+                    <button class="btn btn-primary btn-lg" onclick="startPayment(3500, 'اشتراك سنة كاملة')">اشترك الآن</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="userOrders" class="py-5 d-none">
-    <div class="container">
-        <h2 class="text-center mb-4">طلباتي واشتراكاتي</h2>
+    <section id="userOrders" class="container d-none mb-5">
+        <h3 class="mb-4 text-primary">لوحة تحكم اشتراكاتي</h3>
         <div class="table-responsive">
-            <table class="table table-dark table-hover border-secondary">
+            <table class="table table-dark">
                 <thead>
                     <tr>
                         <th>الباقة</th>
                         <th>التاريخ</th>
-                        <th>حالة الدفع</th>
-                        <th>كود الاشتراك / معلومات الخدمة</th>
+                        <th>الحالة</th>
+                        <th>كود التفعيل</th>
                     </tr>
                 </thead>
                 <tbody id="ordersTableBody">
                     </tbody>
             </table>
         </div>
-    </div>
-</section>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-  // إعدادات مشروعك (انسخها من Firebase Console)
- const firebaseConfig = {
+        // إعدادات Firebase الخاصة بك
+        const firebaseConfig = {
   apiKey: "AIzaSyCdoquNPVZIl8hvmCn8g6LM2DStQjD-8ac",
   authDomain: "wizanesat-iptv-b7d4c.firebaseapp.com",
   projectId: "wizanesat-iptv-b7d4c",
@@ -138,148 +110,111 @@
   measurementId: "G-BFXXF9Y3K7"
 };
 
-  // تهيئة Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
 
-  // عناصر الواجهة
-  const loginBtn = document.getElementById('loginBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const userDisplayName = document.getElementById('userDisplayName');
 
-  // وظيفة تسجيل الدخول بجوجل
-  loginBtn.addEventListener('click', () => {
-    if (auth.currentUser) {
-        signOut(auth).then(() => {
-            alert("تم تسجيل الخروج");
-        });
-    } else {
-        signInWithPopup(auth, provider)
-          .then((result) => {
-            const user = result.user;
-            console.log("مرحباً بك:", user.displayName);
-            alert("أهلاً بك " + user.displayName);
-          }).catch((error) => {
-            console.error("خطأ في الدخول:", error.message);
-          });
-    }
-  });
+        // --- وظيفة تسجيل الدخول ---
+        loginBtn.onclick = async () => {
+            if (auth.currentUser) {
+                await signOut(auth);
+                location.reload();
+            } else {
+                try {
+                    await signInWithPopup(auth, provider);
+                } catch (error) {
+                    console.error("Login Error:", error);
+                }
+            }
+        };
 
-  // مراقبة حالة المستخدم (هل هو مسجل دخول أم لا؟)
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      loginBtn.innerHTML = `<img src="${user.photoURL}" width="30" class="rounded-circle me-2"> خروج`;
-      // هنا يمكنك توجيه المستخدم لصفحة الدفع أو عرض اشتراكاته
-    } else {
-      loginBtn.innerHTML = "تسجيل الدخول";
-    }
-  });
-
-
-window.startPayment = async function(amount, packageName) {
-    const user = auth.currentUser; // التحقق من تسجيل الدخول
-
-    if (!user) {
-        alert("يرجى تسجيل الدخول أولاً باستخدام حساب جوجل!");
-        return;
-    }
-
-    try {
-        // تغيير نص الزر ليشعر العميل أن العملية جارية
-        console.log("جاري إنشاء طلب الدفع...");
-        
-        const response = await fetch('/api/pay', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                amount: amount, 
-                packageName: packageName,
-                userEmail: user.email 
-            })
+        // --- مراقبة حالة المستخدم ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loginBtn.innerText = "خروج";
+                userDisplayName.innerText = `مرحباً، ${user.displayName}`;
+                loadUserOrders(user.uid);
+            } else {
+                loginBtn.innerText = "تسجيل الدخول بجوجل";
+                userDisplayName.innerText = "";
+                document.getElementById('userOrders').classList.add('d-none');
+            }
         });
 
-        const data = await response.json();
+        // --- وظيفة جلب الطلبات ---
+        async function loadUserOrders(uid) {
+            const tbody = document.getElementById('ordersTableBody');
+            const q = query(collection(db, "orders"), where("uid", "==", uid), orderBy("date", "desc"));
+            const querySnapshot = await getDocs(q);
+            
+            document.getElementById('userOrders').classList.remove('d-none');
+            tbody.innerHTML = "";
 
-        if (data.checkout_url) {
-            window.location.href = data.checkout_url; // الانتقال لصفحة شارجيلي
-        } else {
-            console.error("خطأ من السيرفر:", data);
-            alert("حدث خطأ في الاتصال ببوابة الدفع.");
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("تأكد من رفع الموقع على Vercel، الروابط البرمجية لا تعمل بفتح الملف مباشرة.");
-    }
-}
-// مثال للباقة الأولى: onclick="startPayment(1200, 'اشتراك 3 أشهر')"
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const statusClass = data.status === 'completed' ? 'bg-success' : 'bg-warning text-dark';
+                const statusText = data.status === 'completed' ? 'تم التفعيل' : 'قيد المراجعة';
+                const codeHtml = data.iptv_code ? `<code class="text-info">${data.iptv_code}</code>` : "ينتظر الدفع/التفعيل";
 
-
-
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-const db = getFirestore(app);
-
-async function logOrder(userId, packageName) {
-    await addDoc(collection(db, "orders"), {
-        uid: userId,
-        package: packageName,
-        status: "pending",
-        date: new Date()
-    });
-}
-
-import { query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-// دالة لجلب وعرض طلبات العميل
-async function loadUserOrders(userId) {
-    const ordersTableBody = document.getElementById('ordersTableBody');
-    const userOrdersSection = document.getElementById('userOrders');
-    
-    // استعلام لجلب طلبات المستخدم الحالي فقط مرتبة من الأحدث
-    const q = query(collection(db, "orders"), where("uid", "==", userId), orderBy("date", "desc"));
-    const querySnapshot = await getDocs(q);
-    
-    ordersTableBody.innerHTML = ""; // مسح الجدول القديم
-    userOrdersSection.classList.remove('d-none'); // إظهار القسم
-
-    querySnapshot.forEach((doc) => {
-        const order = doc.data();
-        const date = order.date.toDate().toLocaleDateString('ar-DZ');
-        
-        // التحقق مما إذا كان الطلب مكتملاً لإظهار خانة الكود
-        let statusBadge = `<span class="badge bg-warning">قيد الانتظار</span>`;
-        let codeContent = `<span class="text-muted small">يظهر بعد الدفع</span>`;
-
-        if (order.status === "completed") {
-            statusBadge = `<span class="badge bg-success">تم الدفع</span>`;
-            // الخانة الخاصة التي تظهر للعميل عند اكتمال الطلب
-            codeContent = `
-                <div class="bg-light text-dark p-2 rounded fw-bold border-start border-primary border-4">
-                    ${order.iptv_code || "جاري توليد الكود..."}
-                </div>`;
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${data.package}</td>
+                        <td>${data.date.toDate().toLocaleDateString('ar-DZ')}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td>${codeHtml}</td>
+                    </tr>
+                `;
+            });
         }
 
-        const row = `
-            <tr>
-                <td>${order.package}</td>
-                <td>${date}</td>
-                <td>${statusBadge}</td>
-                <td>${codeContent}</td>
-            </tr>
-        `;
-        ordersTableBody.innerHTML += row;
-    });
-}
+        // --- وظيفة الدفع (مرتبطة بـ Cloudflare) ---
+        window.startPayment = async function(amount, packageName) {
+            if (!auth.currentUser) {
+                alert("يرجى تسجيل الدخول أولاً لشراء الباقة");
+                return;
+            }
 
-// تحديث مراقب الحالة (onAuthStateChanged) ليقوم بجلب البيانات فور دخول المستخدم
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        loginBtn.innerHTML = `خروج`;
-        loadUserOrders(user.uid); // جلب الطلبات
-    } else {
-        loginBtn.innerHTML = "تسجيل الدخول";
-        document.getElementById('userOrders').classList.add('d-none');
-    }
-});
-    
+            const cloudflareWorkerUrl = "https://iptv.wizanesat.workers.dev/"; // رابط الـ Worker الخاص بك
 
-</script>
+            try {
+                // 1. تسجيل الطلب مبدئياً في Firebase
+                const orderRef = await addDoc(collection(db, "orders"), {
+                    uid: auth.currentUser.uid,
+                    userEmail: auth.currentUser.email,
+                    package: packageName,
+                    amount: amount,
+                    status: "pending",
+                    date: new Date()
+                });
 
+                // 2. طلب رابط الدفع من Cloudflare
+                const response = await fetch(cloudflareWorkerUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        amount: amount, 
+                        packageName: packageName,
+                        orderId: orderRef.id // إرسال معرف الطلب لربطه لاحقاً
+                    })
+                });
+
+                const data = await response.json();
+                if (data.checkout_url) {
+                    window.location.href = data.checkout_url;
+                } else {
+                    alert("خطأ في الاتصال ببوابة الدفع");
+                }
+            } catch (error) {
+                console.error("Payment Error:", error);
+                alert("حدث خطأ تقني، حاول مرة أخرى.");
+            }
+        };
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
