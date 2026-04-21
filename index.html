@@ -148,7 +148,7 @@
         // --- وظيفة جلب الطلبات ---
         async function loadUserOrders(uid) {
             const tbody = document.getElementById('ordersTableBody');
-            const q = query(collection(db, "orders"), where("uid", "==", uid), orderBy("date", "desc"));
+            const q = query(collection(db, "orders"), where("uid", "==", uid));
             const querySnapshot = await getDocs(q);
             
             document.getElementById('userOrders').classList.remove('d-none');
